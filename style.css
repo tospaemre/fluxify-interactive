@@ -1,4 +1,40 @@
+/* Fluxify Interactive: şirketin kendi kimliği (mor → turkuaz akış) */
 :root {
+  --paper: #F6F6FB;
+  --card: #FFFFFF;
+  --ink: #15132B;
+  --muted: #5F5C7A;
+  --line: #E3E2F0;
+  --accent: #5B4BFF;
+  --accent-deep: #4433E0;
+  --accent-soft: #ECEAFF;
+  --teal: #14B8A6;
+  --flux: linear-gradient(120deg, #5B4BFF 0%, #8B5CF6 45%, #14B8A6 100%);
+  --cream: #FFF4E9;
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 22px;
+  --shadow: 0 1px 2px rgba(21, 19, 43, .06), 0 12px 32px -12px rgba(21, 19, 43, .18);
+  --wrap: 1120px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0D0C1A;
+    --card: #17152B;
+    --ink: #F1F0FA;
+    --muted: #A6A3C2;
+    --line: #2A2745;
+    --accent: #8A7DFF;
+    --accent-deep: #A99FFF;
+    --accent-soft: #24204A;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px -12px rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+
+/* Rabi ürün sayfası: Rabi'nin marka renkleri ve fontu */
+.theme-rabi {
   --paper: #FBF6F0;
   --card: #FFFFFF;
   --ink: #2A1A12;
@@ -7,16 +43,11 @@
   --accent: #D9622F;
   --accent-deep: #A5481D;
   --accent-soft: #FCE7D6;
-  --green: #2E8F80;
-  --cream: #FFF4E9;
-  --radius: 22px;
+  --font: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
   --shadow: 0 1px 2px rgba(66, 39, 25, .06), 0 12px 32px -12px rgba(66, 39, 25, .18);
-  --wrap: 1120px;
-  color-scheme: light;
 }
-
 @media (prefers-color-scheme: dark) {
-  :root {
+  .theme-rabi {
     --paper: #17110D;
     --card: #221913;
     --ink: #F7ECE2;
@@ -26,7 +57,6 @@
     --accent-deep: #F29A6B;
     --accent-soft: #3A2318;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 12px 32px -12px rgba(0, 0, 0, .6);
-    color-scheme: dark;
   }
 }
 
@@ -36,7 +66,7 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font: 400 17px/1.6 "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 400 17px/1.6 var(--font);
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; display: block; }
@@ -100,33 +130,6 @@ section { padding: 88px 0; }
   box-shadow: var(--shadow); padding: 28px;
 }
 
-/* Ürün kartı (ana sayfa) */
-.product {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 40px;
-  background: linear-gradient(140deg, var(--accent) 0%, var(--accent-deep) 100%);
-  color: var(--cream); border: 0;
-}
-.product h3 { font-size: 2rem; font-weight: 900; margin-bottom: .2em; }
-.product .tag { opacity: .85; font-weight: 700; margin-bottom: 1.2em; }
-.product ul { padding: 0; margin: 0 0 8px; list-style: none; display: grid; gap: 8px; }
-.product li::before { content: "✓"; font-weight: 900; margin-right: 10px; }
-.product .btn-primary { background: var(--cream); color: #A5481D; box-shadow: none; }
-.product .btn-ghost { background: transparent; color: var(--cream); border-color: rgba(255, 244, 233, .45); }
-.product-head { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
-.product-head img { width: 64px; height: 64px; border-radius: 16px; box-shadow: 0 6px 16px rgba(0, 0, 0, .2); }
-.phones { display: flex; justify-content: center; gap: 16px; }
-.phone {
-  width: 44%; max-width: 200px; border-radius: 26px; overflow: hidden;
-  border: 6px solid #1c120d; background: #1c120d; box-shadow: 0 24px 40px -16px rgba(0, 0, 0, .5);
-}
-.phones .phone:nth-child(2) { transform: translateY(28px); }
-
-.soon {
-  margin-top: 20px; display: flex; align-items: center; gap: 16px;
-  border-style: dashed; box-shadow: none; background: transparent;
-}
-.soon .dot { width: 44px; height: 44px; flex: none; border-radius: 14px; background: var(--accent-soft); display: grid; place-items: center; font-size: 1.3rem; }
-
 /* Değerler / özellikler */
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid-3 .card img { width: 96px; height: 96px; object-fit: contain; margin-bottom: 8px; }
@@ -171,11 +174,10 @@ section { padding: 88px 0; }
 
 @media (max-width: 860px) {
   section { padding: 64px 0; }
-  .hero-grid, .product { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; }
   .hero { padding: 32px 0 40px; }
   .hero-grid { gap: 20px; }
   .hero-art { order: -1; width: 200px; margin: 0 auto; }
-  .product { padding: 28px 22px; }
   .grid-3 { grid-template-columns: 1fr; }
   .privacy { grid-template-columns: 1fr; text-align: center; }
   .privacy img { margin: 0 auto; width: 120px; }
@@ -191,4 +193,65 @@ section { padding: 88px 0; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .btn { transition: none; }
+}
+
+/* Telefon çerçevesi (Rabi ekran görüntüleri) */
+.phone {
+  border-radius: 26px; overflow: hidden;
+  border: 6px solid #1c120d; background: #1c120d; box-shadow: 0 24px 40px -16px rgba(0, 0, 0, .5);
+}
+
+/* ---------- Fluxify şirket sayfası ---------- */
+.grad-text { background: var(--flux); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.btn-flux { background: var(--flux); color: #fff; box-shadow: 0 10px 24px -10px #5B4BFF; }
+
+.hero-co { position: relative; overflow: hidden; padding: 96px 0 88px; }
+.hero-co .wrap { position: relative; z-index: 1; }
+.hero-co h1 { font-size: clamp(2.4rem, 6.2vw, 4.4rem); max-width: 10.5em; font-weight: 800; letter-spacing: -.03em; }
+.hero-co .lead { font-size: 1.25rem; max-width: 30em; }
+.flux-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.flux-bg svg { position: absolute; right: -16%; top: 50%; transform: translateY(-40%); width: min(58vw, 720px); opacity: .7; }
+.orb { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .45; }
+.orb.o1 { width: 380px; height: 380px; background: #8B5CF6; right: 6%; top: -80px; }
+.orb.o2 { width: 300px; height: 300px; background: #14B8A6; right: 28%; bottom: -120px; opacity: .3; }
+
+.stats { display: flex; flex-wrap: wrap; gap: 14px 40px; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); max-width: 640px; }
+.stats div b { display: block; font-size: 1.6rem; font-weight: 800; }
+.stats div span { color: var(--muted); font-size: .95rem; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.pcard {
+  display: flex; flex-direction: column; text-decoration: none; color: var(--ink);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+a.pcard:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 20px 40px -18px rgba(91, 75, 255, .45); }
+.pcard-top { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.pcard-top img { width: 64px; height: 64px; border-radius: 16px; }
+.pcard-top h3 { margin: 0; font-size: 1.4rem; }
+.pcard p { color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 20px; }
+.chip { font-size: .8rem; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); }
+.chip.live { background: rgba(20, 184, 166, .14); color: #0F8F82; }
+.pcard .more { margin-top: auto; font-weight: 800; color: var(--accent-deep); }
+.pcard.soon-card { border-style: dashed; box-shadow: none; background: transparent; justify-content: center; align-items: flex-start; }
+.ph-icon { width: 64px; height: 64px; border-radius: 16px; background: var(--accent-soft); display: grid; place-items: center; }
+.ph-icon svg { width: 30px; height: 30px; color: var(--accent); }
+
+.icon-badge svg { width: 24px; height: 24px; }
+.band { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.mission { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+.mission p { color: var(--muted); font-size: 1.1rem; }
+
+.cta {
+  text-align: center; color: #fff; border: 0; padding: 64px 28px;
+  background: var(--flux); border-radius: 28px; box-shadow: 0 30px 60px -30px rgba(91, 75, 255, .6);
+}
+.cta h2 { color: #fff; }
+.cta p { opacity: .9; font-size: 1.1rem; }
+.cta .mail { color: #fff; font-size: clamp(1.15rem, 3.5vw, 1.8rem); font-weight: 800; text-decoration: none; word-break: break-word; border-bottom: 2px solid rgba(255, 255, 255, .5); }
+
+@media (max-width: 860px) {
+  .hero-co { padding: 56px 0 48px; }
+  .flux-bg svg { width: 120vw; right: -40%; top: 0; transform: none; opacity: .35; }
+  .grid-2, .mission { grid-template-columns: 1fr; gap: 24px; }
 }
